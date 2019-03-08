@@ -4,22 +4,26 @@ variable "location" {
 
 variable "resource_group_name" {
   description = "(Required) The name of the resource group where the load balancer resources will be placed."
-  default     = "azure_lb-rg"
+  default     = "rg-eus-mscafe-terraform"
 }
 
 variable "prefix" {
   description = "(Required) Default prefix to use with your resource names."
-  default     = "azure_lb"
+  default     = "elb-eus"
 }
 
 variable "remote_port" {
   description = "Protocols to be used for remote vm access. [protocol, backend_port].  Frontend port will be automatically generated starting at 50000 and in the output."
-  default     = {}
+  default     = {
+    ssh = ["Tcp", "22"]
+  }
 }
 
 variable "lb_port" {
   description = "Protocols to be used for lb health probes and rules. [frontend_port, protocol, backend_port]"
-  default     = {}
+  default     = {
+    http = ["80", "Tcp", "80"]
+  }
 }
 
 variable "lb_probe_unhealthy_threshold" {

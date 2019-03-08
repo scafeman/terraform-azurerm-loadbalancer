@@ -7,7 +7,7 @@ resource "azurerm_resource_group" "azlb" {
 
 resource "azurerm_public_ip" "azlb" {
   count                        = "${var.type == "public" ? 1 : 0}"
-  name                         = "${var.prefix}-publicIP"
+  name                         = "${var.prefix}-PIP"
   location                     = "${var.location}"
   resource_group_name          = "${azurerm_resource_group.azlb.name}"
   public_ip_address_allocation = "${var.public_ip_address_allocation}"
@@ -15,7 +15,7 @@ resource "azurerm_public_ip" "azlb" {
 }
 
 resource "azurerm_lb" "azlb" {
-  name                = "${var.prefix}-lb"
+  name                = "${var.prefix}-web"
   resource_group_name = "${azurerm_resource_group.azlb.name}"
   location            = "${var.location}"
   tags                = "${var.tags}"
